@@ -48,7 +48,7 @@
             <button type="button" name="" value="" class="css3button-disable">つぎの問題</button>
             <script>
                 $(function(){
-                    console.log('hoge');
+                    var MaxTime=10;
                     $('input').iCheck({
                         checkboxClass: 'icheckbox_square-red',
                         radioClass: 'iradio_square-red',
@@ -58,8 +58,18 @@
                     .iCheck('uncheck')
                     .on('ifChanged',function(e){
 //                    .on('ifChecked',function(e){
-                        console.log($(e.target).val());
+                        $('.css3button-disable').addClass('css3button').removeClass('css3button-disable');
                     });
+                    var div=$('<div id="counter"/>');
+                    var count=MaxTime;
+                    var counter=function(){
+                        setTimeout(function(){
+                            div.html(count--);
+                            if(count>0) counter();
+                        },1000);
+                    }
+                    $('#que').after(div);
+                    counter();
 //                    var result1 = $('input[name="sex"]:checked').val();  //
                 });
             </script>
