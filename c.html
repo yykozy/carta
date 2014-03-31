@@ -45,9 +45,10 @@
                     </li>
                 </ul>
             </div>
-            <button type="button" name="" value="" class="css3button" disabled="disabled">つぎの問題</button>
+            <button type="button" name="" value="" class="css3button-disable">つぎの問題</button>
             <script>
-                $(document).ready(function(){
+                $(function(){
+                    console.log('hoge');
                     $('input').iCheck({
                         checkboxClass: 'icheckbox_square-red',
                         radioClass: 'iradio_square-red',
@@ -55,7 +56,8 @@
                         uncheckedClass: '',
                     })
                     .iCheck('uncheck')
-                    .on('ifChecked',function(e){
+                    .on('ifChanged',function(e){
+//                    .on('ifChecked',function(e){
                         console.log($(e.target).val());
                     });
 //                    var result1 = $('input[name="sex"]:checked').val();  //
