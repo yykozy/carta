@@ -45,7 +45,7 @@
                     </li>
                 </ul>
             </div>
-            <button id='btn' type="button" name="" value="" class="css3button-disable">つぎの問題</button>
+            <button id='btn' type="button" name="" value="" class="css3button-disable" disabled=true>つぎの問題</button>
             <script>
                 $(function(){
                     var i=0;
@@ -65,27 +65,42 @@
                         uncheckedClass: '',
                     })
                     .iCheck('uncheck')
-                    .on('ifChanged',function(e){
-//                    .on('ifChecked',function(e){
-                        $('.css3button-disable').addClass('css3button').removeClass('css3button-disable');
+                    //.on('ifChanged',function(e){
+                    .on('ifChecked',function(e){
+                        $('#btn').addClass('css3button').removeClass('css3button-disable').removeAttr('disabled');
                     });
                     var div=$('<div id="counter"/>');
-                    var count=MaxTime;
-                    var counter=function(){
-                        setTimeout(function(){
-                            div.html(count--);
-                            if(count>0) counter();
-                        },1000);
+                    var count,timer;
+                    var setTimer=function(){
+                        clearTimeout(timer);
+                        count=MaxTime;
+                        div.html(count--);
+                        var counter=function(){
+                            timer = setTimeout(function(){
+                                div.html(count--);
+                                if(count>0) counter();
+                            },1000);
+                        }
+                        counter();
                     }
                     $('#que').after(div);
-                    counter();
 //                    var result1 = $('input[name="sex"]:checked').val();  //
 
                     $('#btn').click(function(e){
-                        setque(i);
-                        var no=i++;
-//                        setque(i++);
+                        $('#btn').removeClass('css3button').addClass('css3button-disable').attr('disabled','disabled');
+                    	$('input').iCheck('uncheck');
+                        if(i+1==question.length){
+                            $('#que').html('終了！');
+                            clearTimeout(timer);
+                            div.remove();
+
+                        }else{
+                            setque(i++);
+                            setTimer();
+                        }
                     });
+                    setque(i);
+                    setTimer();
                 });
             </script>
 
