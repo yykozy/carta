@@ -5,7 +5,7 @@
         <link href="css/tg.css" rel="stylesheet">
         <link href="skins/square/red.css" rel="stylesheet">
         <script src="js/icheck.js"></script>
-
+<script src="js/question.js"></script>
     </head>
 
 
@@ -45,9 +45,18 @@
                     </li>
                 </ul>
             </div>
-            <button type="button" name="" value="" class="css3button-disable">つぎの問題</button>
+            <button id='btn' type="button" name="" value="" class="css3button-disable">つぎの問題</button>
             <script>
                 $(function(){
+                    var i=0;
+                    
+                    //関数はこれです
+                    var setque=function(no){
+                        var q=question[i].q;
+                        var a=question[i].a;
+                        $('#que').html (q);
+                    }
+                    
                     var MaxTime=10;
                     $('input').iCheck({
                         checkboxClass: 'icheckbox_square-red',
@@ -71,6 +80,11 @@
                     $('#que').after(div);
                     counter();
 //                    var result1 = $('input[name="sex"]:checked').val();  //
+
+                    $('#btn').click(function(e){
+                        setque (i)
+//                        setque(i++);
+                    });
                 });
             </script>
 
