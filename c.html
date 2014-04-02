@@ -52,8 +52,8 @@
                     
                     //関数はこれです
                     var setque=function(no){
-                        var q=question[i].q;
-                        var a=question[i].a;
+                        var q=question[no].q;
+                        var a=question[no].a;
                         $('#que').html (q);
                     }
                     
@@ -95,7 +95,7 @@
                             div.remove();
 
                         }else{
-                            setque(i++);
+                            setque(++i);
                             setTimer();
                         }
                     });
