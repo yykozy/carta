@@ -48,59 +48,80 @@
             <button id='btn' type="button" name="" value="" class="css3button-disable" disabled=true>つぎの問題</button>
             <script>
                 $(function(){
-                    var i=0;
+                    var i=0;        // 問題番号の初期化
+                    var MaxTime=10; // カウンターの初期値を設定
                     
-                    //関数はこれです
-                    var setque=function(no){
-                        var q=question[no].q;
-                        var a=question[no].a;
-                        $('#que').html (q);
-                    }
-                    
-                    var MaxTime=10;
-                    $('input').iCheck({
+                    $('input')  //inputタグを全部取得するjqueryのセレクタ
+                    .iCheck({                       //ラジオボタンを装飾するロジック
                         checkboxClass: 'icheckbox_square-red',
                         radioClass: 'iradio_square-red',
                         increaseArea: '20%', // optional
                         uncheckedClass: '',
                     })
-                    .iCheck('uncheck')
-                    //.on('ifChanged',function(e){
-                    .on('ifChecked',function(e){
-                        $('#btn').addClass('css3button').removeClass('css3button-disable').removeAttr('disabled');
+                    .iCheck('uncheck')  //ラジオボタンのチェックを外す
+                    .on('ifChecked',function(e){    //ラジオボタンのどれかがチェックされたら、
+                        $('#btn').addClass('css3button').removeClass('css3button-disable').removeAttr('disabled');　//ボタンの色を変えて押せるようにする（disabledクラスを外す）
                     });
-                    var div=$('<div id="counter"/>');
-                    var count,timer;
-                    var setTimer=function(){
-                        clearTimeout(timer);
-                        count=MaxTime;
-                        div.html(count--);
+
+                    
+                    //問題と選択肢をセットする関数
+                    var setque=function(no){    //引数(no)は問題番号
+                        var q=question[no].q;　// ここでnoをキーに問題を取得
+                        var a=question[no].a;   //ここでnoをキーに答えを取得
+                        $('#que').html (q);     //問題をhtmlにセット
+                        //この辺にdummyの回答を取得するのを書く
+                        //この辺にdummyの回答をセットするのを書く
+                    }
+                    
+                    var div=$('<div id="counter"/>'); // <div/>タグを作成して、divという変数の中に入れておく
+                    var count,timer; //カウンター用変数を局所変数として宣言しておく
+
+                    //カウントダウンタイマーをセットする関数
+                    var setTimer=function(){　
+                        clearTimeout(timer); //タイマー変数を解除する（カウントダウン途中でももとに戻すため）
+                        count=MaxTime;      //カウンターの初期値を10に設定
+                        div.html(count--);  //divタグの中身のhtmlにカウンターの値を設定する
+                        //1秒刻みに呼ばれるタイマーをセットする関数
                         var counter=function(){
-                            timer = setTimeout(function(){
-                                div.html(count--);
-                                if(count>0) counter();
-                            },1000);
+                            timer = setTimeout(function(){ //タイマーをセットして、timerという変数に入れておく
+                                div.html(count--);  //divタグの中身のhtlmにカウンター値をセットした「後」にカウンターの値をデクリメント（-1）する
+                                if(count>0) counter();　//カウンターの値が0より大きければサイド１秒後に発火するタイマーをセットする
+                            },1000); //1秒=1000ms
                         }
+                        
+                        //１秒刻みタイマーをキックする
                         counter();
                     }
+                    
+                    //id=que（問題表示部分）の後ろにカウンター用のdivタグ（変数名div）をセット
                     $('#que').after(div);
-//                    var result1 = $('input[name="sex"]:checked').val();  //
 
+                    //ボタンがクリックされたときのアクションを定義する関数
                     $('#btn').click(function(e){
+                        //ボタンをdisable状態に戻す
                         $('#btn').removeClass('css3button').addClass('css3button-disable').attr('disabled','disabled');
+                        //ラジオボタンのチェックを外す
                     	$('input').iCheck('uncheck');
+                        //表示されている問題が最後の問題かを確認
                         if(i+1==question.length){
-                            $('#que').html('終了！');
+                            //最後の問題なら終了
+                            $('#que').html('終了！');  
+                            //最後の問題ならタイマーをクリア
                             clearTimeout(timer);
+                            //最後の問題ならカウンターを消す
                             div.remove();
 
                         }else{
+                            //まだ問題があるなら、問題の番号（i）をインクリメント（+1）してから、問題設定関数を呼び出す
                             setque(++i);
+                            //カウンタとダウンタイマーをセットする
                             setTimer();
                         }
                     });
-                    setque(i);
-                    setTimer();
+                    
+                    //最初の問題をセットする
+                    setque(i); //setque(0);とやっても同義
+                    setTimer(); //カウントダウンタイマーをセットする
                 });
             </script>
 
