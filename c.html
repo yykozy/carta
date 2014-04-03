@@ -63,6 +63,10 @@
                         $('#btn').addClass('css3button').removeClass('css3button-disable').removeAttr('disabled');　//ボタンの色を変えて押せるようにする（disabledクラスを外す）
                     });
 
+                    //乱数取得関数
+                    var getRand = function(max){
+                        return(Math.round( Math.random()*max ));
+                    }
                     
                     //問題と選択肢をセットする関数
                     var setque=function(no){    //引数(no)は問題番号
@@ -71,6 +75,23 @@
                         $('#que').html (q);     //問題をhtmlにセット
                         //この辺にdummyの回答を取得するのを書く
                         //この辺にdummyの回答をセットするのを書く
+                        var d_ary=[];
+                        var ans_order = getRand(2); //3のときは答えなしにするとかね
+                        for(var i=0;i<3;i++){
+                            if(ans_order==i){
+                                $('#ans label:eq('+i+')').html(a);
+                            }else{
+                                while(1){
+                                var d_no=getRand(dummy.length-1);
+                                    if(d_ary.indexOf(d_no)==-1){
+                                        d_ary.push(d_no);
+                                        var d=dummy[d_no];   //ここでd_noをキーにdummyを取得
+                                        $('#ans label:eq('+i+')').html(d);     
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     }
                     
                     var div=$('<div id="counter"/>'); // <div/>タグを作成して、divという変数の中に入れておく
