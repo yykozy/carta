@@ -12,7 +12,7 @@
     <body>
         <div class="header">
             <h1>
-                <img src="https://pbs.twimg.com/profile_images/412557816822374400/FuMHw9ke_normal.png" alt="くまった" class"kuma">くまったEnglish
+                <img src="https://pbs.twimg.com/profile_images/412557816822374400/FuMHw9ke_normal.png" alt="くまった" class="kuma">くまったEnglish
             </h1>
         </div>
 
@@ -24,21 +24,21 @@
             <div class="container" id="ans">
                 <ul>
                     <li>
-                        <input type="radio" id="f-option" name="selector" value="1">
+                        <input type="radio" id="f-option" name="selector" value="0">
                         <label for="f-option">こたえ１</label>
 
                         <div class="check"><div class="inside"></div></div>
                     </li>
 
                     <li>
-                        <input type="radio" id="s-option" name="selector" value="2">
+                        <input type="radio" id="s-option" name="selector" value="1">
                         <label for="s-option">こたえ２</label>
 
                         <div class="check"><div class="inside"></div></div>
                     </li>
 
                     <li>
-                        <input type="radio" id="t-option" name="selector" value="3">
+                        <input type="radio" id="t-option" name="selector" value="2">
                         <label for="t-option">こたえ３</label>
 
                         <div class="check"><div class="inside"></div></div>
@@ -69,6 +69,7 @@
                     }
                     
                     //問題と選択肢をセットする関数
+                    var ans_order = getRand(2); //3のときは答えなしにするとかね
                     var setque=function(no){    //引数(no)は問題番号
                         var q=question[no].q;　// ここでnoをキーに問題を取得
                         var a=question[no].a;   //ここでnoをキーに答えを取得
@@ -76,7 +77,7 @@
                         //この辺にdummyの回答を取得するのを書く
                         //この辺にdummyの回答をセットするのを書く
                         var d_ary=[];
-                        var ans_order = getRand(2); //3のときは答えなしにするとかね
+
                         for(var i=0;i<3;i++){
                             if(ans_order==i){
                                 $('#ans label:eq('+i+')').html(a);
@@ -119,6 +120,18 @@
 
                     //ボタンがクリックされたときのアクションを定義する関数
                     $('#btn').click(function(e){
+                        
+                        //ここからいま触ってるとこ
+                        var ansValue = $(':radio[name="selector"]:checked').val();//選択した番号を取得
+                        if(ans_order==ansValue){
+                            $('#btn').html('せいかい！'); 
+                            }else{
+                                $('#btn').html('ざんねん！');
+                                    }
+                        console.log ('ans_order->'+ans_order);
+                        console.log ('ansValue->'+ansValue);
+                        //ここまで
+                        
                         //ボタンをdisable状態に戻す
                         $('#btn').removeClass('css3button').addClass('css3button-disable').attr('disabled','disabled');
                         //ラジオボタンのチェックを外す
