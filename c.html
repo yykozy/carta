@@ -46,6 +46,8 @@
                 </ul>
             </div>
             <button id='btn' type="button" name="" value="" class="css3button-disable" disabled=true>つぎの問題</button>
+            <div id='answer'></div>
+                
             <script>
                 $(function(){
                     var i=0;        // 問題番号の初期化
@@ -105,38 +107,64 @@
                         div.html(count--);  //divタグの中身のhtmlにカウンターの値を設定する
                         //1秒刻みに呼ばれるタイマーをセットする関数
                         var counter=function(){
+                            /*
                             timer = setTimeout(function(){ //タイマーをセットして、timerという変数に入れておく
                                 div.html(count--);  //divタグの中身のhtlmにカウンター値をセットした「後」にカウンターの値をデクリメント（-1）する
                                 if(count>0) counter();　//カウンターの値が0より大きければサイド１秒後に発火するタイマーをセットする
                             },1000); //1秒=1000ms
-                        }
-                        
-                        //１秒刻みタイマーをキックする
-                        counter();
+                            */
+                            var countdown = function(){ //タイマーをセットして、timerという変数に入れておく
+                                div.html(count--);  //divタグの中身のhtlmにカウンター値をセットした「後」にカウンターの値をデクリメント（-1）する
+                                if(count>=0){
+                                    counter();　//カウンターの値が0より大きければサイド１秒後に発火するタイマーをセットする
+                                }else{
+                                    div.html('じかんぎれ');
+                                    
+                                }
+
+                            }
+                            
+                            timer = setTimeout(countdown,1000); //1秒=1000ms
+                            
+                            
+                            /*
+                            //ここ
+                                if(counter==0){
+                                    div.html('じかんぎれ');
+                                    }
+                            //ここまで
+                            */
+                        }                     
+                        counter();//１秒刻みタイマーをキックする
+
+
                     }
                     
                     //id=que（問題表示部分）の後ろにカウンター用のdivタグ（変数名div）をセット
                     $('#que').after(div);
-
+                    
                     //ボタンがクリックされたときのアクションを定義する関数
                     $('#btn').click(function(e){
                         
-                        //ここからいま触ってるとこ
+                        //<nao>ここからいま触ってるとこ
                         var ansValue = $(':radio[name="selector"]:checked').val();//選択した番号を取得
                         if(ans_order==ansValue){
-                            $('#btn').html('せいかい！'); 
+                            $('#answer').html('せいかい！'); 
                             }else{
-                                $('#btn').html('ざんねん！');
+                                $('#answer').html('ざんねん！');
                                     }
                         console.log ('ans_order->'+ans_order);
                         console.log ('ansValue->'+ansValue);
                         //ここまで
-                        
+                                                
                         //ボタンをdisable状態に戻す
                         $('#btn').removeClass('css3button').addClass('css3button-disable').attr('disabled','disabled');
                         //ラジオボタンのチェックを外す
                     	$('input').iCheck('uncheck');
+                    
                         //表示されている問題が最後の問題かを確認
+                        
+
                         if(i+1==question.length){
                             //最後の問題なら終了
                             $('#que').html('終了！');  
@@ -151,8 +179,8 @@
                             //カウンタとダウンタイマーをセットする
                             setTimer();
                         }
-                    });
-                    
+                        });
+
                     //最初の問題をセットする
                     setque(i); //setque(0);とやっても同義
                     setTimer(); //カウントダウンタイマーをセットする
