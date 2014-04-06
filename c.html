@@ -119,7 +119,7 @@
                                     counter();　//カウンターの値が0より大きければサイド１秒後に発火するタイマーをセットする
                                 }else{
                                     div.html('じかんぎれ');
-                                    
+                                    nextStep();
                                 }
 
                             }
@@ -142,7 +142,7 @@
                     
                     //id=que（問題表示部分）の後ろにカウンター用のdivタグ（変数名div）をセット
                     $('#que').after(div);
-                    
+                    var nextStep;
                     //ボタンがクリックされたときのアクションを定義する関数
                     $('#btn').click(function(e){
                         
@@ -156,7 +156,11 @@
                         console.log ('ans_order->'+ans_order);
                         console.log ('ansValue->'+ansValue);
                         //ここまで
-                                                
+                        
+                        //<nao>ここから触る0406
+                        var nextStep=function(){
+                        //<nao>ここまで触る0406
+                        
                         //ボタンをdisable状態に戻す
                         $('#btn').removeClass('css3button').addClass('css3button-disable').attr('disabled','disabled');
                         //ラジオボタンのチェックを外す
@@ -178,6 +182,7 @@
                             setque(++i);
                             //カウンタとダウンタイマーをセットする
                             setTimer();
+                        }
                         }
                         });
 
