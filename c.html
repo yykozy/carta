@@ -143,21 +143,7 @@
                     //id=que（問題表示部分）の後ろにカウンター用のdivタグ（変数名div）をセット
                     $('#que').after(div);
                     var nextStep;
-                    //ボタンがクリックされたときのアクションを定義する関数
-                    $('#btn').click(function(e){
-                        
-                        //<nao>ここからいま触ってるとこ
-                        var ansValue = $(':radio[name="selector"]:checked').val();//選択した番号を取得
-                        if(ans_order==ansValue){
-                            $('#answer').html('せいかい！'); 
-                            }else{
-                                $('#answer').html('ざんねん！');
-                                    }
-                        console.log ('ans_order->'+ans_order);
-                        console.log ('ansValue->'+ansValue);
-                        //ここまで
-                        
-                        //<nao>ここから触る0406
+                                            //<nao>ここから触る0406
                         var nextStep=function(){
                         //<nao>ここまで触る0406
                         
@@ -184,6 +170,21 @@
                             setTimer();
                         }
                         }
+                    //ボタンがクリックされたときのアクションを定義する関数
+                    $('#btn').click(function(e){
+                        
+                        //<nao>ここからいま触ってるとこ
+                        var ansValue = $(':radio[name="selector"]:checked').val();//選択した番号を取得
+                        if(ans_order==ansValue){
+                            $('#answer').html('せいかい！'); 
+                            }else{
+                                $('#answer').html('ざんねん！');
+                                    }
+                        console.log ('ans_order->'+ans_order);
+                        console.log ('ansValue->'+ansValue);
+                        //ここまで
+                        
+
                         });
 
                     //最初の問題をセットする
