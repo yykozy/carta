@@ -44,13 +44,13 @@
                     <div class="check"><div class="inside"></div></div>
                 </li>
                 <li>
-                    <input type="radio" id="t-option" name="selector" value="3">
+                    <input type="radio" id="o-option" name="selector" value="3">
                     <label for="o-option">こたえ４</label>
 
                     <div class="check"><div class="inside"></div></div>
                 </li>
                 <li>
-                    <input type="radio" id="t-option" name="selector" value="4">
+                    <input type="radio" id="i-option" name="selector" value="4">
                     <label for="i-option">こたえ５</label>
 
                     <div class="check"><div class="inside"></div></div>
@@ -85,7 +85,7 @@
         }
 
         //問題と選択肢をセットする関数
-        var ans_order = getRand(0,4); //3のときは答えなしにするとかね
+        var ans_order = getRand(4); //3のときは答えなしにするとかね
         var setque=function(no){    //引数(no)は問題番号
             var q=question[no].q;　// ここでnoをキーに問題を取得
             var a=question[no].a;   //ここでnoをキーに答えを取得
@@ -98,7 +98,7 @@
                 if(ans_order==i){
                     $('#ans label:eq('+i+')').html(a);
                 }else{
-                    while(3){
+                    while(1){
                     var d_no=getRand(dummy.length-1);
                         if(d_ary.indexOf(d_no)==-1){
                             d_ary.push(d_no);
