@@ -1,67 +1,3 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <link href="css/tg.css" rel="stylesheet">
-    <link href="skins/square/red.css" rel="stylesheet">
-    <script src="js/icheck.js"></script>
-    <script src="js/question.js"></script>
-</head>
-
-
-<body>
-    <div class="header">
-        <h1>
-            <img src="https://pbs.twimg.com/profile_images/412557816822374400/FuMHw9ke_normal.png" alt="くまった" class="kuma">くまったEnglish
-        </h1>
-    </div>
-
-    <div class="container">
-        <div class="container" id="que">
-            問題じゃじゃーん
-        </div>
-
-        <div class="container" id="ans">
-            <ul>
-                <li>
-                    <input type="radio" id="f-option" name="selector" value="0">
-                    <label for="f-option">こたえ１</label>
-
-                    <div class="check"><div class="inside"></div></div>
-                </li>
-
-                <li>
-                    <input type="radio" id="s-option" name="selector" value="1">
-                    <label for="s-option">こたえ２</label>
-
-                    <div class="check"><div class="inside"></div></div>
-                </li>
-
-                <li>
-                    <input type="radio" id="t-option" name="selector" value="2">
-                    <label for="t-option">こたえ３</label>
-
-                    <div class="check"><div class="inside"></div></div>
-                </li>
-                <li>
-                    <input type="radio" id="t-option" name="selector" value="3">
-                    <label for="o-option">こたえ４</label>
-
-                    <div class="check"><div class="inside"></div></div>
-                </li>
-                <li>
-                    <input type="radio" id="t-option" name="selector" value="4">
-                    <label for="i-option">こたえ５</label>
-
-                    <div class="check"><div class="inside"></div></div>
-                </li>
-            </ul>
-        </div>
-        
-        <button id='btn' type="button" name="" value="" class="css3button-disable" disabled=true>つぎの問題</button>
-        <div id='answer'>
-        </div>
-
 <script>
     $(function(){
         var i=0;        // 問題番号の初期化
@@ -85,7 +21,7 @@
         }
 
         //問題と選択肢をセットする関数
-        var ans_order = getRand(0,4); //3のときは答えなしにするとかね
+        var ans_order = getRand(2); //3のときは答えなしにするとかね
         var setque=function(no){    //引数(no)は問題番号
             var q=question[no].q;　// ここでnoをキーに問題を取得
             var a=question[no].a;   //ここでnoをキーに答えを取得
@@ -94,11 +30,11 @@
             //この辺にdummyの回答をセットするのを書く
             var d_ary=[];
 
-            for(var i=0;i<5;i++){
+            for(var i=0;i<3;i++){
                 if(ans_order==i){
                     $('#ans label:eq('+i+')').html(a);
                 }else{
-                    while(3){
+                    while(1){
                     var d_no=getRand(dummy.length-1);
                         if(d_ary.indexOf(d_no)==-1){
                             d_ary.push(d_no);
@@ -110,7 +46,6 @@
                 }
             }
         }
-        console.log ('ans_order->'+ans_order);
 
         var div=$('<div id="counter"/>'); // <div/>タグを作成して、divという変数の中に入れておく
         var count,timer; //カウンター用変数を局所変数として宣言しておく
@@ -201,6 +136,3 @@
         setTimer(); //カウントダウンタイマーをセットする
     });
 </script>
-
-    </body>
-</html>
