@@ -85,8 +85,9 @@
         }
 
         //問題と選択肢をセットする関数
-        var ans_order = getRand(4); //3のときは答えなしにするとかね
+        var ans_order; //3のときは答えなしにするとかね
         var setque=function(no){    //引数(no)は問題番号
+            ans_order = getRand(4)
             var q=question[no].q;　// ここでnoをキーに問題を取得
             var a=question[no].a;   //ここでnoをキーに答えを取得
             $('#que').html (q);     //問題をhtmlにセット
@@ -110,7 +111,6 @@
                 }
             }
         }
-        console.log ('ans_order->'+ans_order);
 
         var div=$('<div id="counter"/>'); // <div/>タグを作成して、divという変数の中に入れておく
         var count,timer; //カウンター用変数を局所変数として宣言しておく
