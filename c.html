@@ -166,7 +166,8 @@
             //表示されている問題が最後の問題かを確認
             if(i+1==question.length){
                 //最後の問題なら終了
-                $('#que').html('終了！');  
+                $('#que').html('終了！');
+                $('#answer').html(result);
                 //最後の問題ならタイマーをクリア
                 clearTimeout(timer);
                 //最後の問題ならカウンターを消す
@@ -180,16 +181,20 @@
             }
             }
 
+          var result=0; //正解数
+        
         //ボタンがクリックされたときのアクションを定義する関数
         $('#btn').click(function(e){
 
             //<nao>ここからいま触ってるとこ
             var ansValue = $(':radio[name="selector"]:checked').val();//選択した番号を取得
             if(ans_order==ansValue){
-                $('#answer').html('せいかい！'); 
+                $('#answer').html('せいかい！');
+                result++;
                 }else{
                     $('#answer').html('ざんねん！');
                         }
+                    console.log ('result->'+result);
             console.log ('ans_order->'+ans_order);
             console.log ('ansValue->'+ansValue);
             //ここまで
