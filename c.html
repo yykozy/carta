@@ -78,6 +78,7 @@
         .on('ifChecked',function(e){    //ラジオボタンのどれかがチェックされたら、
             $('#btn').addClass('css3button').removeClass('css3button-disable').removeAttr('disabled');　//ボタンの色を変えて押せるようにする（disabledクラスを外す）
         });
+        
 
         //乱数取得関数
         var getRand = function(max){
@@ -110,7 +111,9 @@
                     }
                 }
             }
+
         }
+
 
         var div=$('<div id="counter"/>'); // <div/>タグを作成して、divという変数の中に入れておく
         var count,timer; //カウンター用変数を局所変数として宣言しておく
@@ -178,6 +181,11 @@
                 setque(++i);
                 //カウンタとダウンタイマーをセットする
                 setTimer();
+                //ゲージをセット            
+                $("#que").stop().css({width:"300px",opacity:"100%"}).animate(
+                {width: 0,opacity: 0},
+                10000
+                );
             }
             }
 
@@ -204,6 +212,11 @@
         //最初の問題をセットする
         setque(i); //setque(0);とやっても同義
         setTimer(); //カウントダウンタイマーをセットする
+        //ゲージをセット
+        $("#que").css({width:"300px",opacity:"100%"}).animate(
+        {width: 0, opacity: 0},
+        10000
+        );
     });
 </script>
 
