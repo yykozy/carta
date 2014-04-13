@@ -1,1 +1,54 @@
-aaaaa
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="css/second.css">
+    
+</head>
+
+<BODY bgcolor="#ffffff">
+<FORM>
+    <SELECT onChange="chBgColor(this)">
+        <OPTION value="" selected>推しめんはだれ</OPTION>
+        <OPTION value="red">かなこ</OPTION>
+        <OPTION value="yellow">しおりん</OPTION>
+        <OPTION value="pink">あーりん</OPTION>
+        <OPTION value="green">ももか</OPTION>
+        <OPTION value="purple">れに</OPTION>
+    </SELECT>
+</FORM>
+ 
+<form>    
+    <ul>
+                <li>
+                    <input type="radio" value="red">かなこ
+                </li>
+                <li>
+                    <input type="radio" value="yellow">しおりん
+                </li>
+                <li>
+                    <input type="radio" value="pink">あーりん
+                </li>
+                        <li>
+                    <input type="radio" value="green">ももか
+                </li>
+                        <li>
+                    <input type="radio" value="purple">れに
+                </li>
+        </ul>
+</form>
+
+
+
+    
+    <SCRIPT>
+    function chBgColor(opt) {
+    document.bgColor = opt.options[opt.selectedIndex].value;
+        document.bgColor = input.value;
+    }
+        
+
+    </SCRIPT>
+</BODY>
+</HTML>
