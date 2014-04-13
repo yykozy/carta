@@ -4,7 +4,11 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
     </script>
     <link rel="stylesheet" href="css/second.css">
-    
+	<style type="text/css">
+	li:hover{
+		cursor:pointer;
+	}
+	</style>    
 </head>
 
 <BODY bgcolor="#ffffff">
@@ -22,19 +26,19 @@
 <form>    
     <ul>
                 <li>
-                    <input type="radio" value="red">かなこ
+                    <input type="radio" name="momocro" value="red">かなこ
                 </li>
                 <li>
-                    <input type="radio" value="yellow">しおりん
+                    <input type="radio" name="momocro" value="yellow">しおりん
                 </li>
                 <li>
-                    <input type="radio" value="pink">あーりん
+                    <input type="radio" name="momocro" value="pink">あーりん
                 </li>
                         <li>
-                    <input type="radio" value="green">ももか
+                    <input type="radio" name="momocro" value="green">ももか
                 </li>
                         <li>
-                    <input type="radio" value="purple">れに
+                    <input type="radio" name="momocro" value="purple">れに
                 </li>
         </ul>
 </form>
@@ -45,10 +49,12 @@
     <SCRIPT>
     function chBgColor(opt) {
     document.bgColor = opt.options[opt.selectedIndex].value;
-        document.bgColor = input.value;
+//        document.bgColor = input.value;
     }
         
-
+		$('li').click(function(){
+			document.bgColor=$('input',$(this)).prop('checked',true).val();
+		});
     </SCRIPT>
 </BODY>
 </HTML>
